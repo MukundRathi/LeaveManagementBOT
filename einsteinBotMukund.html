@@ -1,0 +1,15 @@
+<!-- chatContainer.html -->
+<template>
+    <div class="chat-launcher">
+        <template if:false={showChat}>
+            <button class="chat-icon" onclick={handleOpenChat}>💬 Chat</button>
+        </template>
+
+        <template if:true={showChat}>
+            <div class="chat-window">
+                <iframe src={vfPageUrl} class="chat-iframe"></iframe>
+                <button class="close-chat" onclick={handleCloseChat}>✖ Close</button>
+            </div>
+        </template>
+    </div>
+</template>
