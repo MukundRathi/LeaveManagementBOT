@@ -4,7 +4,7 @@ import { LightningElement, track } from 'lwc';
 export default class ChatContainer extends LightningElement {
     @track showChat = false;
 
-    vfPageUrl = '/apex/LilyBotVF'; // replace with actual VF page name
+    vfPageUrl = '/apex/BOT'; // replace with actual VF page name
 
     handleOpenChat() {
         this.showChat = true;
