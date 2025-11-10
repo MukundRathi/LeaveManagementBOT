@@ -1,0 +1,61 @@
+<apex:page >
+<html>
+    <script 
+    type='text/javascript'>
+        // To Greet User 
+        var currentUser = {
+        id: '{!$User.Id}',
+        name: '{!$User.FirstName} {!$User.LastName}',
+        email: '{!$User.Email}'
+    };
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+            //embedded_svc.settings.avatarImgURL = '/sfc/p/gL000008ezY4/a/gL00000037WP/g3qnLfIrwIemyG1FXc7SpU96vmCZMvfl5qdwVFCwX2E';
+			
+			embeddedservice_bootstrap.init(
+				'00DgL000008ezY4',
+				'demo',
+				'https://orgfarm-f7527e1d77-dev-ed.develop.my.site.com/ESWdemo1760436315234',
+				{
+					scrt2URL: 'https://orgfarm-f7527e1d77-dev-ed.develop.my.salesforce-scrt.com',
+                    embeddedServiceConfig: {
+                        contextualData: {
+                            userId: currentUser.id,
+                            userName: currentUser.name,
+                            userEmail: currentUser.email
+                        }
+                    }
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+    
+window.addEventListener('message', function(event) {
+            console.log('Message received from LWC:', event.data);
+
+            if (event.data === 'endChat') {
+                console.log('Ending chat as requested by LWC...');
+                try {
+                    // Try both methods to ensure closure
+                    if (embeddedservice_bootstrap && embeddedservice_bootstrap.closeChat) {
+                        embeddedservice_bootstrap.closeChat();
+                        embeddedservice_bootstrap.settings.clearSessionOnUnload = true;
+						window.sessionStorage.clear();
+                    } else if (embeddedservice_bootstrap && embeddedservice_bootstrap.minimizeChat) {
+                        embeddedservice_bootstrap.minimizeChat();
+                    }
+                } catch (e) {
+                    console.error('Error closing or minimizing chat:', e);
+                }
+            }
+        });
+</script>
+<script 
+    type='text/javascript' src='https://orgfarm-f7527e1d77-dev-ed.develop.my.site.com/ESWdemo1760436315234/assets/js/bootstrap.min.js' 
+    onload='initEmbeddedMessaging()'></script>
+
+</html>
+</apex:page>
