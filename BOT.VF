@@ -11,14 +11,12 @@
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-            //embedded_svc.settings.avatarImgURL = '/sfc/p/gL000008ezY4/a/gL00000037WP/g3qnLfIrwIemyG1FXc7SpU96vmCZMvfl5qdwVFCwX2E';
-			
 			embeddedservice_bootstrap.init(
-				'00DgL000008ezY4',
-				'demo',
-				'https://orgfarm-f7527e1d77-dev-ed.develop.my.site.com/ESWdemo1760436315234',
+				'ORG-ID',
+				'Embedded Service Deployment name',
+				'Site URL where bot is Created',
 				{
-					scrt2URL: 'https://orgfarm-f7527e1d77-dev-ed.develop.my.salesforce-scrt.com',
+					scrt2URL: 'https://DOMAIN.develop.my.salesforce-scrt.com',
                     embeddedServiceConfig: {
                         contextualData: {
                             userId: currentUser.id,
@@ -54,7 +52,7 @@ window.addEventListener('message', function(event) {
         });
 </script>
 <script 
-    type='text/javascript' src='https://orgfarm-f7527e1d77-dev-ed.develop.my.site.com/ESWdemo1760436315234/assets/js/bootstrap.min.js' 
+    type='text/javascript' src='https://DOMAIN.develop.my.site.com/ESWdemo1760436315234/assets/js/bootstrap.min.js' 
     onload='initEmbeddedMessaging()'></script>
 
 </html>
